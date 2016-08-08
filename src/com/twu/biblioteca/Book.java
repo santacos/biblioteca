@@ -42,6 +42,8 @@ public class Book {
         return false;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,5 +63,19 @@ public class Book {
         result = 31 * result + (author != null ? author.hashCode() : 0);
         result = 31 * result + (publishedYear != null ? publishedYear.hashCode() : 0);
         return result;
+    }
+
+    public boolean returnBook() {
+        boolean isReturnSuccessfully = false;
+        if(isCheckedOut){
+            this.isCheckedOut = false;
+            isReturnSuccessfully = true;
+        }
+        return isReturnSuccessfully;
+    }
+
+    public String getDetail() {
+        String detail = String.format("%1$-10s %2$10s %3$10s", this.name, this.author, this.publishedYear);
+        return detail;
     }
 }

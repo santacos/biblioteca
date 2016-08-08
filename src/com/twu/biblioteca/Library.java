@@ -3,6 +3,7 @@ package com.twu.biblioteca;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by santacos on 8/7/2016 AD.
@@ -36,10 +37,28 @@ public class Library {
             Book checkedOutBook = book.get();
             boolean isCheckedOutSuccessfully = checkedOutBook.checkOut();
             return isCheckedOutSuccessfully;
+
         }else{
             return false;
         }
+    }
+
+    public boolean returnBookByName(String name) {
+        Optional<Book> book = findBookByName(name);
+        if(book.isPresent()){
+            Book returningBook = book.get();
+            boolean isReturnBookSuccessfully = returningBook.returnBook();
+            return isReturnBookSuccessfully;
+        }else{
+            return false;
+        }
+    }
 
 
+    public ArrayList<Book> getAllAvailableBooks() {
+        return books
+                .stream()
+                .filter(book -> !book.isCheckedOut())
+                .collect(Collectors.toCollection(ArrayList<Book>::new));
     }
 }
