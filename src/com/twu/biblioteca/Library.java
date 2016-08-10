@@ -56,9 +56,12 @@ public class Library {
 
 
     public ArrayList<Book> getAllAvailableBooks() {
-        return books
-                .stream()
-                .filter(book -> !book.isCheckedOut())
-                .collect(Collectors.toCollection(ArrayList<Book>::new));
+        ArrayList<Book> allAvailableBooks = new ArrayList<>();
+        for(Book book: books){
+            if(!book.isCheckedOut())
+                allAvailableBooks.add(book);
+        }
+
+        return allAvailableBooks;
     }
 }

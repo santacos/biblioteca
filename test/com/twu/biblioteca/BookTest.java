@@ -21,44 +21,42 @@ public class BookTest {
     }
 
     @Test
-    public void createBookCorrectly(){
-        assertEquals("book", book.getName());
-        assertEquals("Ben", book.getAuthor());
-        assertEquals("1994", book.getPublishedYear());
-        assertEquals(false, book.isCheckedOut());
+    public void should_generate_Book_with_default_status_when_instantiate_book(){
+        assertEquals("name of book should be the same with name that was instantiated", "book", book.getName());
+        assertEquals("author of book should be the same with the author that was instantiated", "Ben", book.getAuthor());
+        assertEquals("published year of book should be the same with year that was instantiated", "1994", book.getPublishedYear());
+        assertFalse("default check out status of book should be false", book.isCheckedOut());
     }
 
     @Test
-    public void checkOutAvailableBookSuccessfully(){
-        assertTrue(book.checkOut());
-        assertTrue(book.isCheckedOut());
+    public void should_be_able_to_checkOut_book_when_book_is_available(){
+        assertTrue("checkOut method should return true when the book is checkOuted successfully", book.checkOut());
+        assertTrue("the book should be checked out after checkOut method is called", book.isCheckedOut());
     }
 
     @Test
-    public void checkOutUnavailableBookShouldReturnFalse(){
-        assertTrue(book.checkOut());
-        assertFalse(book.checkOut());
-    }
-
-    @Test
-    public void returnCheckedOutBookShouldReturnTrue() throws Exception {
+    public void should_not_be_able_to_checkOut_again_book_after_book_was_checkedOut(){
         book.checkOut();
-        assertTrue(book.returnBook());
+        assertFalse("book should not be able to check out again after the book was checked out", book.checkOut());
     }
 
     @Test
-    public void returnWrongBookShouldReturnFalse() throws Exception {
-        assertFalse(book.returnBook());
+    public void should_be_able_to_return_book_after_book_was_checkedOut() {
+        book.checkOut();
+        assertTrue("book can be returned after the book was checked out", book.returnBook());
     }
 
     @Test
-    public void getDetailOfTheBook() throws Exception {
+    public void should_not_be_able_to_return_book_when_book_is_not_checkedOut() {
+        assertFalse("available book can not be returned", book.returnBook());
+    }
+
+    @Test
+    public void should_have_all_detail_of_the_book_when_call_get_detail_method()  {
         String detail = book.getDetail();
-        System.out.println(detail);
-        assertTrue( detail.contains( book.getName() ));
-        assertTrue( detail.contains( book.getAuthor() ));
-        assertTrue( detail.contains( book.getPublishedYear() ));
-
+        assertTrue( "detail should have name of book", detail.contains( book.getName() ));
+        assertTrue( "detail should have author of book", detail.contains( book.getAuthor() ));
+        assertTrue( "detail should have published year of book", detail.contains( book.getPublishedYear() ));
     }
 
 }
