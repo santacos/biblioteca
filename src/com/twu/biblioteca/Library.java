@@ -1,13 +1,10 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-/**
- * Created by santacos on 8/7/2016 AD.
- */
+
 public class Library {
     private String name;
     private ArrayList<Book> books;
@@ -56,12 +53,9 @@ public class Library {
 
 
     public ArrayList<Book> getAllAvailableBooks() {
-        ArrayList<Book> allAvailableBooks = new ArrayList<>();
-        for(Book book: books){
-            if(!book.isCheckedOut())
-                allAvailableBooks.add(book);
-        }
-
-        return allAvailableBooks;
+        return books
+                .stream()
+                .filter(book -> !book.isCheckedOut())
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
