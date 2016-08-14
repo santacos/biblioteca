@@ -5,18 +5,16 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.*;
 
-/**
- * Created by santacos on 8/7/2016 AD.
- */
 public class LibraryTest {
-    Library library;
-    ArrayList<Book> books;
+    private Library library;
+    private ArrayList<Book> books;
 
     @Before
     public void setUp() throws Exception {
-        books = new ArrayList();
+        books = new ArrayList<>();
         books.add(new Book("book1", "Ben", "1994"));
         books.add(new Book("book2", "Ben", "1995"));
         books.add(new Book("book3", "Ben", "1995"));
@@ -56,6 +54,8 @@ public class LibraryTest {
         expectedList.add(new Book("book3", "Ben", "1995"));
         expectedList.add(new Book("book2", "Ben", "1995"));
 
-        assertEquals(expectedList, library.getAllAvailableBooks());
+
+        assertThat("all available books should be appeared in the list",
+                library.getAllAvailableBooks(), containsInAnyOrder(expectedList.toArray()));
     }
 }
