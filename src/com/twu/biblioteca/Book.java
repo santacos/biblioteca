@@ -1,17 +1,16 @@
 package com.twu.biblioteca;
 
 
-public class Book {
+public class Book extends Item {
     private String name;
     private String author;
     private String publishedYear;
-    private boolean isCheckedOut;
 
     public Book(String name, String author, String publishedYear) {
+        super();
         this.name = name;
         this.author = author;
         this.publishedYear = publishedYear;
-        this.isCheckedOut = false;
     }
 
     public String getName() {
@@ -25,21 +24,6 @@ public class Book {
     public String getPublishedYear() {
         return publishedYear;
     }
-
-
-    public boolean isCheckedOut() {
-        return isCheckedOut;
-    }
-
-
-    public boolean checkOut() {
-        if(!isCheckedOut){
-            this.isCheckedOut = true;
-            return true;
-        }
-        return false;
-    }
-
 
 
     @Override

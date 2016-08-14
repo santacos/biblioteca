@@ -11,6 +11,8 @@ import static org.junit.Assert.*;
 public class LibraryTest {
     private Library library;
     private ArrayList<Book> books;
+    private ArrayList<Movie> movies;
+    private ArrayList<User> users;
 
     @Before
     public void setUp() throws Exception {
@@ -18,6 +20,16 @@ public class LibraryTest {
         books.add(new Book("book1", "Ben", "1994"));
         books.add(new Book("book2", "Ben", "1995"));
         books.add(new Book("book3", "Ben", "1995"));
+
+        movies = new ArrayList<>();
+        movies.add(new Movie("movie1", "1959", "James", "0"));
+        movies.add(new Movie("movie2", "1960", "Alice", "1"));
+        movies.add(new Movie("movie3", "1961", "Bob", "10"));
+
+        users = new ArrayList<>();
+        users.add(new User("user1", "a@g.com", "Thailand", "08-999-9999"));
+        users.add(new User("user2", "b@g.com", "England", "08-999-9999"));
+        users.add(new User("user3", "c@g.com", "Singapore", "08-999-9999"));
 
         library = new Library("Biblioteca", books);
 
@@ -58,4 +70,6 @@ public class LibraryTest {
         assertThat("all available books should be appeared in the list",
                 library.getAllAvailableBooks(), containsInAnyOrder(expectedList.toArray()));
     }
+
+
 }
