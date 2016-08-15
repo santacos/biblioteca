@@ -3,9 +3,9 @@ package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 
 public class BookTest {
@@ -40,12 +40,12 @@ public class BookTest {
     @Test
     public void should_be_able_to_return_book_after_book_was_checkedOut() {
         book.checkOut();
-        assertTrue("book can be returned after the book was checked out", book.returnBook());
+        assertTrue("book can be returned after the book was checked out", book.returnItem());
     }
 
     @Test
     public void should_not_be_able_to_return_book_when_book_is_not_checkedOut() {
-        assertFalse("available book can not be returned", book.returnBook());
+        assertFalse("available book can not be returned", book.returnItem());
     }
 
     @Test
@@ -54,6 +54,14 @@ public class BookTest {
         assertTrue( "detail should have name of book", detail.contains( book.getName() ));
         assertTrue( "detail should have author of book", detail.contains( book.getAuthor() ));
         assertTrue( "detail should have published year of book", detail.contains( book.getPublishedYear() ));
+    }
+
+    @Test
+    public void should_have_header_of_detail_when_call_getter_detail_of_movie() throws Exception {
+
+        assertThat("header should have name", book.getHeaderOfDetail(), containsString("Name"));
+        assertThat("header should have author", book.getHeaderOfDetail(), containsString("Author"));
+        assertThat("header should have published year", book.getHeaderOfDetail(), containsString("Published year"));
     }
 
 }

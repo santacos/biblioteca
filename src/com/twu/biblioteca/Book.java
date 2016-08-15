@@ -47,17 +47,15 @@ public class Book extends Item {
         return result;
     }
 
-    public boolean returnBook() {
-        boolean isReturnSuccessfully = false;
-        if(isCheckedOut){
-            this.isCheckedOut = false;
-            isReturnSuccessfully = true;
-        }
-        return isReturnSuccessfully;
-    }
+
 
     public String getDetail() {
         String detail = String.format("%1$-10s %2$10s %3$10s", this.name, this.author, this.publishedYear);
         return detail;
+    }
+
+    public static String getHeaderOfDetail() {
+        String header = String.format("%1$-10s %2$10s %3$10s", "Name", "Author", "Published year");
+        return header;
     }
 }

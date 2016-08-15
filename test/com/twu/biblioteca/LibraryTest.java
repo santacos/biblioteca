@@ -31,7 +31,7 @@ public class LibraryTest {
         users.add(new User("user2", "b@g.com", "England", "08-999-9999"));
         users.add(new User("user3", "c@g.com", "Singapore", "08-999-9999"));
 
-        library = new Library("Biblioteca", books);
+        library = new Library("Biblioteca", books, movies);
 
     }
 
@@ -72,4 +72,26 @@ public class LibraryTest {
     }
 
 
+    @Test
+    public void should_be_found_movie_when_movie_is_valid_in_library(){
+        assertEquals("valid movie should be found when search movie by name", new Movie("movie1", "1959", "James", "0"), library.findMovieByName("movie1").get());
+    }
+
+
+    @Test
+    public void should_be_able_to_check_out_movie_when_movie_is_available_in_library() {
+        assertTrue("valid movie should be able to be checked out successfully", library.checkOutMovieByName("movie1"));
+    }
+
+    @Test
+    public void should_return_all_available_movies_in_library() {
+        library.checkOutMovieByName("movie1");
+        ArrayList<Movie> expectedList = new ArrayList<>();
+        expectedList.add(new Movie("movie2", "1960", "Alice", "1"));
+        expectedList.add(new Movie("movie3", "1961", "Bob", "10"));
+
+
+        assertThat("all available movies should be appeared in the list",
+                library.getAllAvailableMovies(), containsInAnyOrder(expectedList.toArray()));
+    }
 }

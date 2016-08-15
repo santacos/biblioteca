@@ -45,7 +45,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void should_have_lists_appear_when_choose_the_first_option()  {
+    public void should_have_available_book_lists_appear_when_choose_the_first_option()  {
         bibliotecaApp.chooseOption("1");
         assertThat("Lists should appear with the detail of first book",
                     outContent.toString(),
@@ -63,19 +63,38 @@ public class BibliotecaAppTest {
                 ));
     }
 
-    @Ignore
-    public void should_be_able_to_check_out_book_when_choose_the_second_option() {
+    @Test
+    public void should_have_available_movie_lists_appear_when_choose_the_second_option()  {
         bibliotecaApp.chooseOption("2");
-        assertThat("Check out book should appear after choose the second option",
+        assertThat("Lists should appear with the detail of first movie",
                 outContent.toString(),
-                containsString("Check out book"));
+                containsString(new Movie("movie1", "1959", "James", "0").getDetail()
+                ));
+
+        assertThat("Lists should appear with the detail of second movie",
+                outContent.toString(),
+                containsString(new Movie("movie2", "1960", "Alice", "1").getDetail()
+                ));
+
+        assertThat("Lists should appear with the detail of third movie",
+                outContent.toString(),
+                containsString(new Movie("movie3", "1961", "Bob", "10").getDetail()
+                ));
     }
 
-    @Ignore
-    public void should_be_able_to_return_book_when_choose_the_third_option() {
-        bibliotecaApp.chooseOption("3");
-        assertThat("Return book should appear after choose the third option",
-                outContent.toString(),
-                containsString("Return book"));
+    @Test
+    public void should_have_user_login_when_choose_login_option() {
+        bibliotecaApp.loginUser("333-3333", "1234");
+        assertTrue("Current user should not be null object", bibliotecaApp.getCurrentUser() != null);
+        assertThat("Current user should be Job", bibliotecaApp.getCurrentUser().getName(), containsString("Job"));
+    }
+
+    @Test
+    public void should_be_able_to_logOut_user_after_user_is_logged_in() {
+        bibliotecaApp.loginUser("333-3333", "1234");
+        User user = bibliotecaApp.getCurrentUser();
+        assertTrue("Current user should be able to log out successfully", bibliotecaApp.logoutUser());
+        assertFalse("User should have login status to be false", user.isLoggedIn());
+        assertTrue("Current user should be null after user is logged out", bibliotecaApp.getCurrentUser() == null);
     }
 }

@@ -13,6 +13,10 @@ public class UserTest {
     String address = "Bangkok Thailand";
     String phoneNumber = "02-555-5555";
 
+    String username = "tony123";
+    String password = "1234";
+
+    UserCredential userCredential = new UserCredential(username, password);
     User user = new User(name, email, address, phoneNumber);
 
     @Test
@@ -32,5 +36,10 @@ public class UserTest {
     public void should_be_logged_in_after_user_signed_in() {
         user.logIn();
         assertTrue("status of user's logIn should be true after user logged in", user.isLoggedIn());
+    }
+
+    @Test
+    public void should_be_able_to_set_username_and_password() throws Exception {
+        user.setUserCredential(userCredential);
     }
 }

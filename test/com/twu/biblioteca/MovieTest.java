@@ -35,8 +35,17 @@ public class MovieTest {
     }
 
     @Test
-    public void should_not_be_able_to_check_out_when_movie_is_not_available() throws Exception {
+    public void should_not_be_able_to_check_out_when_movie_is_not_available() {
         titanicMovie.checkOut();
         assertFalse("the movie should not be able to check out again when it is not available", titanicMovie.checkOut());
+    }
+
+    @Test
+    public void should_have_header_of_detail_when_call_getter_detail_of_movie() throws Exception {
+
+        assertThat("header should have name", titanicMovie.getHeaderOfDetail(), containsString("Name"));
+        assertThat("header should have year", titanicMovie.getHeaderOfDetail(), containsString("Year"));
+        assertThat("header should have director", titanicMovie.getHeaderOfDetail(), containsString("Director"));
+        assertThat("header should have rating", titanicMovie.getHeaderOfDetail(), containsString("Rating"));
     }
 }
