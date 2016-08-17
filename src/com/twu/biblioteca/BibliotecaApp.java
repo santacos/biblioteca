@@ -91,7 +91,7 @@ public class BibliotecaApp {
         chosenOption = chosenOption.toLowerCase();
         switch (chosenOption) {
             case "1" :
-                showAllAvailableBook();
+                showAllAvailableBooks();
                 break;
             case "2":
                 showAllAvailableMovie();
@@ -124,7 +124,7 @@ public class BibliotecaApp {
         chosenOption = chosenOption.toLowerCase();
         switch (chosenOption) {
             case "1" :
-                showAllAvailableBook();
+                showAllAvailableBooks();
                 break;
             case "2":
                 showAllAvailableMovie();
@@ -193,7 +193,7 @@ public class BibliotecaApp {
             System.out.println(MessageTranslator.unsuccessfulCheckOut);
     }
 
-    private void showAllAvailableBook() {
+    private void showAllAvailableBooks() {
         System.out.println(MessageTranslator.LIST_OF_ALL_LIBRARY_BOOKS);
         System.out.println(Book.getHeaderOfDetail());
 

@@ -4,15 +4,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.*;
 
-public class LibraryTest {
+public class
+LibraryTest {
     private Library library;
     private ArrayList<Book> books;
     private ArrayList<Movie> movies;
     private ArrayList<User> users;
+    private ArrayList<RentableItem> items;
 
     @Before
     public void setUp() throws Exception {
@@ -31,13 +34,32 @@ public class LibraryTest {
         users.add(new User("user2", "b@g.com", "England", "08-999-9999"));
         users.add(new User("user3", "c@g.com", "Singapore", "08-999-9999"));
 
-        library = new Library("Biblioteca", books, movies);
+        items = new ArrayList<>();
+        for(Book book : books){
+            RentableItem<Book> rentableBook = new RentableItem<>(book);
+            items.add(rentableBook);
+        }
+
+        for(Movie movie : movies){
+            RentableItem<Movie> rentableBook = new RentableItem<>(movie);
+            items.add(rentableBook);
+        }
+
+        library = new Library("Biblioteca", books, movies, items);
+
 
     }
 
     @Test
     public void should_be_found_book_when_book_is_valid_in_library(){
         assertEquals("valid book should be found when search book by name", new Book("book1", "Ben", "1994"), library.findBookByName("book1").get());
+    }
+
+    @Test
+    public void should_be_found_item_when_item_is_available_in_library() {
+        Optional<Movie> foundMovie1 = library.findItemByName("movie1", RentableItemType.MOVIE);
+        assertEquals(new Movie("movie1", "1959", "James", "0"), foundMovie1.get());
+
     }
 
     @Test
@@ -94,4 +116,6 @@ public class LibraryTest {
         assertThat("all available movies should be appeared in the list",
                 library.getAllAvailableMovies(), containsInAnyOrder(expectedList.toArray()));
     }
+
+
 }

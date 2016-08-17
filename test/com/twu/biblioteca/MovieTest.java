@@ -41,7 +41,7 @@ public class MovieTest {
     }
 
     @Test
-    public void should_have_header_of_detail_when_call_getter_detail_of_movie() throws Exception {
+    public void should_have_header_of_detail_when_call_getter_detail_of_movie()  {
 
         assertThat("header should have name", titanicMovie.getHeaderOfDetail(), containsString("Name"));
         assertThat("header should have year", titanicMovie.getHeaderOfDetail(), containsString("Year"));

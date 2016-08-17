@@ -25,6 +25,15 @@ public class Book extends Item {
         return publishedYear;
     }
 
+    public String getDetail() {
+        String detail = String.format("%1$-10s %2$10s %3$10s", this.name, this.author, this.publishedYear);
+        return detail;
+    }
+
+    public static String getHeaderOfDetail() {
+        String header = String.format("%1$-10s %2$10s %3$10s", "Name", "Author", "Published year");
+        return header;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -49,13 +58,4 @@ public class Book extends Item {
 
 
 
-    public String getDetail() {
-        String detail = String.format("%1$-10s %2$10s %3$10s", this.name, this.author, this.publishedYear);
-        return detail;
-    }
-
-    public static String getHeaderOfDetail() {
-        String header = String.format("%1$-10s %2$10s %3$10s", "Name", "Author", "Published year");
-        return header;
-    }
 }

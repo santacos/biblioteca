@@ -1,7 +1,5 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.Book;
-import com.twu.biblioteca.Item;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -33,6 +31,5 @@ public class ItemTest {
         item.checkOut(user);
         item.returnItem();
         assertTrue("Borrower of this item should not be set after it was return", item.getBorrower() == null);
-
     }
 }

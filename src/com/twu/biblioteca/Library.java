@@ -8,12 +8,14 @@ import java.util.stream.Collectors;
 public class Library {
     private String name;
     private ArrayList<Book> books;
+    private ArrayList<RentableItem> items;
     private ArrayList<Movie> movies;
 
-    public Library(String name, ArrayList<Book> books) {
+    public Library(String name, ArrayList<Book> books, ArrayList<Movie> movies, ArrayList<RentableItem> items) {
         this.name = name;
         this.books = books;
-        this.movies = new ArrayList<>();
+        this.items = items;
+        this.movies = movies;
     }
 
     public Library(String name, ArrayList<Book> books, ArrayList<Movie> movies) {
@@ -96,4 +98,34 @@ public class Library {
         }
         return Optional.empty();
     }
+
+    public Optional<Movie> findItemByName(String name, RentableItemType rentableItemType) {
+
+        ArrayList<RentableItem> filterItems = filterItemByType(items, rentableItemType);
+        for(RentableItem item: filterItems){
+//            if(item.getItem().getName().equals(name)){
+//                //return Optional.of(item.getItem());
+//            }
+        }
+        return Optional.empty();
+    }
+
+    private ArrayList<RentableItem> filterItemByType(ArrayList<RentableItem> items, RentableItemType rentableItemType) {
+        if(rentableItemType.equals(RentableItemType.BOOK)) {
+            return items
+                    .stream()
+                    .filter(item -> item.getItem() instanceof Book)
+                    .collect(Collectors.toCollection(ArrayList::new));
+        }
+
+        if(rentableItemType.equals(RentableItemType.MOVIE)) {
+            return items
+                    .stream()
+                    .filter(item -> item.getItem() instanceof Movie)
+                    .collect(Collectors.toCollection(ArrayList::new));
+        }
+
+        return new ArrayList<RentableItem>();
+    }
 }
+
